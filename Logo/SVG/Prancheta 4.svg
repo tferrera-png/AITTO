@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_6" data-name="Camada 6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #0d0c0e;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="381.12" y="452.5" width="20" height="175"/>
+  <path class="cls-1" d="M430.37,452.5v18.5h57v156.5h20v-128.24h114.25v128.24h20v-156.5h57.25v-18.5h-268.5ZM507.37,491.26v-20.26h114.25v20.26h-114.25Z"/>
+  <path class="cls-1" d="M728.11,452.5v175h140v-175h-140ZM848.11,607.5h-100v-135h100v135Z"/>
+  <path class="cls-1" d="M211.89,452.5v175h20v-87.54l98.96-.37,1.04.04v87.87h20v-175h-140ZM231.89,519.59v-47.09h100v47.09h-100Z"/>
+</svg>
