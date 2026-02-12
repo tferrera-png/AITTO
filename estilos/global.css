@@ -4,16 +4,24 @@
     --cor1: #060607;
     --cor2: #F1F4FF;
     --cor3: #F81A3F;
+    --font1: 'argentumsans';
+    --font2: 'argentumsansita'
 }
-/*@font-face {
-    font-family: 'ArgentumSans-Black';
-    src: url(ArgentumSans-Black.ttf) format('ttf');
-}*/
+@font-face {
+    font-family: 'argentumsans';
+    src: url(../argentum-sans/ArgentumSans-Light.ttf) format('ttf'),
+         url(../argentum-sans/ArgentumSans-LightItalic.ttf) format('ttf');
+    font-weight: 300;
+    font-style: normal;
+}
+
 *{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif
+}
+body{
+    background-color: var(--cor1);
 }
 header{
     display: flex;
@@ -21,10 +29,11 @@ header{
     align-items: center;
     justify-content: space-between;
     background-color: var(--cor2);
-    height: 13vh;
+    height: 11vh;
+    margin-bottom: 50px;
 }
 header  img{
-    width: 100px;
+    width: 22%;
     height: 100%;
 }
 .logo{
@@ -39,6 +48,7 @@ header  img{
     text-decoration: none;
     color: var(--cor1);
     font-weight: bold;
+    font-size: 1.2em;
     padding: 10px;
 }
 main{
@@ -54,16 +64,18 @@ main{
     justify-content: space-around;
     align-items: center;
 }
+.text h1{
+    font-family: var(--font1);
+    color: var(--cor3);
+    padding-bottom: 10px;
+}
 .text{
-    color: var(--cor1);
+    color: var(--cor2);
+    font-family: var(--font1);
     padding: 20px;
     text-align: justify;
     width: 50%;
     height: 100%;
-}
-.text h1{
-    color: var(--cor1);
-    padding-bottom: 10px;
 }
 #history img{
     height: 300px;
@@ -74,8 +86,35 @@ main{
     flex-flow: row-reverse nowrap;
     justify-content: space-around;
     align-items: center;
+    margin-bottom: 30px;
 }
 #who img{
     height: 300px;
     width: 300px;
+}
+footer{
+    background-color: var(--cor2);
+    color: var(--cor3);
+    font-size: 1.3em;
+    text-align: center;
+    font-weight: bold;
+    height: 8vh;
+    padding: 12px;
+}
+
+@media screen and (min-width: 275px) and (max-width: 600px){
+    
+    header{
+        display: flex;
+        flex-flow: row-reverse nowrap;
+        justify-content: space-between;
+    }
+    .logo{
+        padding-left: 30px;
+        width: 35%;
+    }
+    .us{
+        display: none;
+        width: 65%;
+    }
 }
