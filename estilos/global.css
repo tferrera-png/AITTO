@@ -32,19 +32,22 @@ header{
     height: 11vh;
     margin-bottom: 50px;
 }
+
+#icon-menu{
+    display: none;
+}
 header  img{
-    width: 22%;
-    height: 100%;
+    width: 100px;
 }
 .logo{
     padding-left: 30px;
     width: 65%;
 }
-.us{
+menu{
     text-align: center;
     width: 35%;
 }
-.us a{
+menu a{
     text-decoration: none;
     color: var(--cor1);
     font-weight: bold;
@@ -77,7 +80,7 @@ main{
     width: 50%;
     height: 100%;
 }
-#history img{
+.image img{
     height: 300px;
     width: 300px;
 }
@@ -87,10 +90,6 @@ main{
     justify-content: space-around;
     align-items: center;
     margin-bottom: 30px;
-}
-#who img{
-    height: 300px;
-    width: 300px;
 }
 footer{
     background-color: var(--cor2);
@@ -102,19 +101,50 @@ footer{
     padding: 12px;
 }
 
-@media screen and (min-width: 275px) and (max-width: 600px){
+@media screen and (max-width: 768px){
     
     header{
         display: flex;
         flex-flow: row-reverse nowrap;
-        justify-content: space-between;
+        justify-content: space-around;
     }
     .logo{
-        padding-left: 30px;
-        width: 35%;
+        display: flex;
+        justify-content: flex-end;
+        /*padding-right: 30px;*/
     }
-    .us{
-        display: none;
-        width: 65%;
+    #icon-menu{
+        display: block;
+        font-size: 25px;
+        padding: 3px;
+    }
+    #icon-menu:hover{
+        cursor: pointer;
+        border: 2px solid var(--cor1);
+        border-radius: 5px;
+    }
+    main{
+        flex-flow: column nowrap;
+        gap: 0px;
+    }
+    #history{
+        flex-flow: column nowrap;
+    }
+    .text{
+        width: 100%;
+    }
+    .text h1{
+        font-size: 30px;
+    }
+    .image{
+        height: 200px;
+        width: 200px;
+    }
+    .image img{
+        height: 100%;
+        width: 100%;
+    }
+    #who{
+        flex-flow: column nowrap;
     }
 }
