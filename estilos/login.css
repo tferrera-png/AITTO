@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+:root{
+    --cor1: #060607;
+    --cor2: #F1F4FF;
+    --cor3: #F81A3F;
+    --font1: 'argentumsans';
+    --font2: 'argentumsansita'
+}
+@font-face {
+    font-family: 'argentumsans';
+    src: url(../argentum-sans/ArgentumSans-Light.ttf) format('ttf'),
+         url(../argentum-sans/ArgentumSans-LightItalic.ttf) format('ttf');
+    font-weight: 300;
+    font-style: normal;
+}
+
+*{
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    background-color: var(--cor2);
+}
+header{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    background-color: var(--cor2);
+    height: 10vh;
+}
+
+#icon-menu{
+    display: none;
+}
+header  img{
+    width: 100px;
+}
+.logo{
+    padding-left: 30px;
+    width: 65%;
+}
+html, body{
+    height: 100vh;
+    width: 100vw;
+}
+main{
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+#login{
+    height: 350px;
+    width: 350px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+#form{
+    display: flex;
+    flex-flow: column nowrap;
+}
+#form h1{
+    align-self: flex-start;
+}

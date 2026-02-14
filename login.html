@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="estilos/login.css" />
+    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+  </head>
+  <body>
+    <header>
+      <a
+      href="/index.html" 
+      target="_self" 
+      rel="prev">
+      <img src="Logo/4x/Prancheta 4.png" alt="">
+      </a>
+    </header>
+    <main>
+      <section id="login">
+        <div id="form">
+          <h1>Login</h1>
+          <p>Faça login para acessar sua conta!</p>
+          <form id="formTag" autocomplete="on">
+            <div class="campo">
+              <label for="ilogin">Login</label>
+              <span class='bx  bx-user'></span>
+              <input
+                type="email"
+                name="login"
+                id="ilogin"
+                required
+                placeholder="Email"
+                autocomplete="email"
+              />
+            </div>
+            <div class="campo">
+              <label for="isen">Senha</label>
+              <span class='bx  bx-lock-keyhole'></span>
+              <input
+                type="password"
+                name="sen"
+                id="isen"
+                required
+                min="8"
+                max="20"
+                placeholder="Password"
+                autocomplete="current-password"
+              />
+            </div>
+            <div class="botao">
+              <input type="submit" value="Entrar" />
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <script src="/js/login.js"></script>
+  </body>
+</html>
