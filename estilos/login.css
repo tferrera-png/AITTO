@@ -10,7 +10,7 @@
 @font-face {
     font-family: 'argentumsans';
     src: url(../argentum-sans/ArgentumSans-Light.ttf) format('ttf'),
-         url(../argentum-sans/ArgentumSans-LightItalic.ttf) format('ttf');
+        url(../argentum-sans/ArgentumSans-LightItalic.ttf) format('ttf');
     font-weight: 300;
     font-style: normal;
 }
@@ -22,18 +22,14 @@
     box-sizing: border-box;
 }
 body{
-    background-color: var(--cor2);
+    background-color: var(--cor1);
 }
 header{
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    background-color: var(--cor2);
+    background-color: var(--cor1);
     height: 10vh;
-}
-
-#icon-menu{
-    display: none;
 }
 header  img{
     width: 100px;
@@ -42,30 +38,74 @@ header  img{
     padding-left: 30px;
     width: 65%;
 }
-html, body{
-    height: 100vh;
-    width: 100vw;
-}
 main{
-    height: 90vh;
-    width: 100vw;
     display: flex;
-    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    height: 80vh;
 }
-#login{
-    height: 350px;
-    width: 350px;
+.container{
+    position: relative;
+    width: 650px;
+    height: 450px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+}
+.form-box{
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: var(--cor3);
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
     align-items: center;
+    text-align: center;
 }
-#form{
-    display: flex;
-    flex-flow: column nowrap;
+form{
+    width: 100%;
 }
-#form h1{
-    align-self: flex-start;
+.container h1{
+    font-size: 36px;
+    margin: -10px 0;
+}
+.input-box{
+    position: relative;
+    margin: 30px 0;
+}
+.input-box input{
+    width: 100%;
+    padding: 13px 50px 13px 10px;
+    background: var(--cor2);
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+.input-box i{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+.forgot-link{
+    margin: -15px 0 15px;
+}
+.forgot-link a{
+    font-size: 14.5px;
+    color: var(--cor2);
+    text-decoration: none;
+}
+.btn{
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+
 }
