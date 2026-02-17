@@ -16,19 +16,18 @@
 }
 
 *{
-    overflow: hidden;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 body{
-    background-color: var(--cor1);
+    background-color: var(--cor2);
 }
 header{
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    background-color: var(--cor1);
+    background-color: var(--cor2);
     height: 10vh;
 }
 header  img{
@@ -48,24 +47,31 @@ main{
     position: relative;
     width: 650px;
     height: 450px;
-    background-color: #fff;
+    background-color: var(--cor1);
     border-radius: 30px;
     box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+    /*overflow: hidden;*/
 }
 .form-box{
     position: absolute;
     right: 0;
     width: 50%;
     height: 100%;
-    background-color: var(--cor3);
+    background-color: var(--cor1);
     display: flex;
     align-items: center;
     text-align: center;
+    padding: 30px;
+    z-index: 1;
+}
+.form-box.register{
+    visibility: hidden;
 }
 form{
     width: 100%;
 }
 .container h1{
+    color: var(--cor2);
     font-size: 36px;
     margin: -10px 0;
 }
@@ -107,5 +113,55 @@ form{
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-
+}
+.container p{
+    color: var(--cor2);
+    font-size: 14.5px;
+    margin: 15px 0;
+}
+.social-icons a{
+    display: inline-flex;
+    padding: 10px;
+    border: 1px solid var(--cor2);
+    border-radius: 8px;
+    font-size: 15px;
+    color: var(--cor2);
+    text-decoration: none;
+    margin: 0 8px;
+}
+.toggle-box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.toggle-box::before{
+    content: '';
+    position: absolute;
+    left: -250%;
+    width: 300%;
+    height: 100%;
+    background-color: var(--cor3);
+    border-radius: 150px;
+    z-index: 2;
+}
+.toggle-panel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.toggle-panel p{
+    margin-bottom: 20px;
+}
+.toggle-panel .btn{
+    width: 160px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid var(--cor2);
+    box-shadow: none;
+    color: var(--cor2);
 }
