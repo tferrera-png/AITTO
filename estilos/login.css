@@ -29,6 +29,7 @@ header{
     align-items: center;
     background-color: var(--cor2);
     height: 10vh;
+    padding-bottom: 20px;
 }
 header  img{
     width: 100px;
@@ -199,15 +200,9 @@ form{
     color: var(--cor2);
 }
 
-@media screen and (min-width:200px) and (max-width: 650px){
-    header{
-        height: 40px;
-    }
-    main{
-        height: 90vh;
-    }
+@media screen and (max-width: 650px){
     .container{
-        height: calc(100vh - 50px);
+        height: 85vh;
     }
     .form-box{
         bottom: 0;
@@ -251,5 +246,13 @@ form{
     }
     .container.active .toggle-panel.toggle-right{
         bottom: 0;
+    }
+}
+@media screen and (max-width: 400px){
+    .toggle-box::before{
+        border-radius: 10vw;
+    }
+    .toggle-box h1{
+        font-size: 34px;
     }
 }
