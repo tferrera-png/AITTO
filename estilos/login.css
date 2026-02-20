@@ -199,7 +199,7 @@ form{
     color: var(--cor2);
 }
 
-@media screen and (max-width: 650px){
+@media screen and (min-width:200px) and (max-width: 650px){
     header{
         height: 40px;
     }
