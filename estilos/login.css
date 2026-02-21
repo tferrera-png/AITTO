@@ -65,7 +65,7 @@ main{
     text-align: center;
     padding: 30px;
     z-index: 1;
-    transition: .5s ease-in-out 1s, visibility 0s 1s;
+    transition: .5s ease-in-out .5s, visibility 0s .5s;
 }
 .container.active .form-box{
     right: 50%;
@@ -200,14 +200,17 @@ form{
     color: var(--cor2);
 }
 
-@media screen and (max-width: 650px){
+@media screen and (max-width: 550px){
+    header{
+        margin-bottom: 10px;
+    }
     .container{
-        height: 85vh;
+        height: 90vh;
     }
     .form-box{
         bottom: 0;
         height: 70%;
-        width: 100%;
+        width: 100%
     }
     .social-icons a{
         font-size: 10px;
