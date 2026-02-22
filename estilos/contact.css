@@ -3,6 +3,7 @@
   height: 70vh;
   gap: 10px;
   flex-direction: column;
+  overflow-y: auto;
   padding: 10px;
 }
 .message {
@@ -94,7 +95,7 @@
 .send {
   color: var(--cor2);
 }
-#form-teclado {
+#form-message {
   display: flex;
   justify-content: center;
   align-items: center;
