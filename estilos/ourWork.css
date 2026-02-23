@@ -24,8 +24,8 @@
   src:local("ArgentumSans"), url(../argentum-sans/ArgentumSans-LightItalic.ttf) format(truetype);
 }
 main{
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .bg-icon{
     background-color: #151518;
