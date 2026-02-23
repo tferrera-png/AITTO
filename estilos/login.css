@@ -8,13 +8,15 @@
     --font2: 'argentumsansita'
 }
 @font-face {
-    font-family: 'argentumsans';
-    src: url(../argentum-sans/ArgentumSans-Light.ttf) format('ttf'),
-        url(../argentum-sans/ArgentumSans-LightItalic.ttf) format('ttf');
-    font-weight: 300;
-    font-style: normal;
+    font-family: "ArgentumSans";
+    src: url(../argentum-sans/ArgentumSans-Light.ttf);
+    src: local("ArgentumSans"), url(../argentum-sans/ArgentumSans-Light.ttf) format("truetype");
 }
-
+@font-face {
+  font-family: "ArgentumSansita";
+  src: url(../argentum-sans/ArgentumSans-LightItalic.ttf);
+  src:local("ArgentumSans"), url(../argentum-sans/ArgentumSans-LightItalic.ttf) format(truetype);
+}
 *{
     margin: 0px;
     padding: 0px;
@@ -81,6 +83,7 @@ form{
 }
 .container h1{
     color: var(--cor2);
+    font-family: var(--font1);
     font-size: 36px;
     margin: -10px 0;
 }
@@ -109,6 +112,7 @@ form{
     margin: -15px 0 15px;
 }
 .forgot-link a{
+    font-family: var(--font2);
     font-size: 14.5px;
     color: var(--cor2);
     text-decoration: none;
@@ -125,6 +129,7 @@ form{
 }
 .container p{
     color: var(--cor2);
+    font-family: var(--font1);
     font-size: 14.5px;
     margin: 15px 0;
 }

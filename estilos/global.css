@@ -100,6 +100,7 @@ footer {
   background-color: var(--cor2);
   color: var(--cor3);
   font-size: 1.3em;
+  font-family: var(--font1);
   text-align: center;
   font-weight: bold;
   height: 8vh;
@@ -119,7 +120,6 @@ footer {
   .logo {
     display: flex;
     justify-content: flex-end;
-    /*padding-right: 30px;*/
   }
   #icon-menu {
     display: flex;

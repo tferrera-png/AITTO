@@ -23,6 +23,10 @@
   src: url(../argentum-sans/ArgentumSans-LightItalic.ttf);
   src:local("ArgentumSans"), url(../argentum-sans/ArgentumSans-LightItalic.ttf) format(truetype);
 }
+main{
+  display: flex;
+  flex-flow: row wrap;
+}
 .bg-icon{
     background-color: #151518;
     height: 250px;
