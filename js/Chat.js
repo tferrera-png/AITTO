@@ -215,7 +215,7 @@ async function GetMessages() {
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
-        hour12: false, // 24h
+        hour12: false, 
       });
       senderName.textContent = formatted;
 
