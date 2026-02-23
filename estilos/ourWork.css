@@ -57,8 +57,9 @@ article{
 
 @media screen and (max-width: 768px){
   main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    gap: 20px;
+    justify-items: center;
+    grid-template-columns: 1fr;
   }
 }
