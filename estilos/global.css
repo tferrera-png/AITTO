@@ -4,18 +4,19 @@
   --cor1: #060607;
   --cor2: #f1f4ff;
   --cor3: #f81a3f;
-  --font1: "argentumsans";
-  --font2: "argentumsansita";
+  --font1: "ArgentumSans";
+  --font2: "ArgentumSansita";
 }
 @font-face {
-  font-family: "argentumsans";
-  src:
-    url(../argentum-sans/ArgentumSans-Light.ttf) format("ttf"),
-    url(../argentum-sans/ArgentumSans-LightItalic.ttf) format("ttf");
-  font-weight: 300;
-  font-style: normal;
+    font-family: "ArgentumSans";
+    src: url(../argentum-sans/ArgentumSans-Light.ttf);
+    src: local("ArgentumSans"), url(../argentum-sans/ArgentumSans-Light.ttf) format("truetype");
 }
-
+@font-face {
+  font-family: "ArgentumSansita";
+  src: url(../argentum-sans/ArgentumSans-LightItalic.ttf);
+  src:local("ArgentumSans"), url(../argentum-sans/ArgentumSans-LightItalic.ttf) format(truetype);
+}
 * {
   margin: 0px;
   padding: 0px;
@@ -52,6 +53,7 @@ menu {
 }
 menu a {
   text-decoration: none;
+  font-family: var(--font1);
   color: var(--cor1);
   font-weight: bold;
   font-size: 1.2em;
