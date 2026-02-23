@@ -14,14 +14,18 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 });
 
 function GenerateProjects(id, name, photo_url) {
-  const section = document.getElementById("Show-projects");
-  const project = document.createElement("article");
+  const section = document.querySelector("main");
+  const project = document.createElement("div");
+  project.classList.add("bg-icon")
+
+  const article = document.createElement("article");
+
 
   const divImg = document.createElement("div");
   const imgProject = document.createElement("img");
   imgProject.src = `${BackendUrl}${photo_url}`;
   imgProject.alt = name;
-  divImg.classList.add("article");
+  divImg.classList.add("image");
   divImg.appendChild(imgProject);
 
   const divText = document.createElement("div");
@@ -30,8 +34,9 @@ function GenerateProjects(id, name, photo_url) {
   divText.classList.add("texto");
   divText.appendChild(nameProject);
 
-  project.appendChild(divImg);
-  project.appendChild(divText);
+  article.appendChild(divImg);
+  article.appendChild(divText);
+  project.appendChild(article);
   section.appendChild(project);
 }
 function clickMenu() {
