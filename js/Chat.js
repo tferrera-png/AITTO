@@ -4,12 +4,61 @@ let selectedConversationId = null;
 let intervalId = null;
 let userId = null;
 let currentUserId = null;
+let socket;
 
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "hidden") {
-    stopAutoUpdate();
-  } else {
-    startAutoUpdate();
+try {
+  socket = io("http://localhost:3000", {
+    withCredentials: true,
+  });
+} catch (error) {
+  window.location.href = "login.html";
+}
+
+socket.on("connect", () => {
+  console.log("Conectado:", socket.id);
+});
+
+socket.on("receiveMessage", (data) => {
+  console.log("Mensagem recebida:", data);
+
+  if (
+    (!isUserAdmin && data.conversationId === selectedConversationId) ||
+    (isUserAdmin && data.conversationId === selectedConversationId)
+  ) {
+    if (isUserAdmin) {
+      GetMessagesOnAdmin(selectedConversationId);
+    } else {
+      GetMessages();
+    }
+  }
+});
+socket.on("newMessageNotification", (data) => {
+  alert("🔔 Nova mensagem recebida:", data);
+
+  if (isUserAdmin && data.conversationId !== selectedConversationId) {
+    showNotificationBadge(data.conversationId);
+  }
+});
+
+socket.on("errorMessage", (err) => {
+  console.log("Erro:", err);
+});
+const textarea = document.getElementById("iMessage");
+
+textarea.addEventListener("input", () => {
+  textarea.style.height = "auto";
+
+  const maxHeight = 150;
+  const newHeight = Math.min(textarea.scrollHeight, maxHeight);
+  textarea.style.height = newHeight + "px";
+
+  const progress = Math.min(newHeight / maxHeight, 1);
+  textarea.style.borderRadius = 20 - (12 * progress) + "px";
+});
+textarea.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    form.dispatchEvent(new Event("submit"));
   }
 });
 async function getCurrentUser() {
@@ -23,7 +72,7 @@ async function getCurrentUser() {
     userId = data.id;
   } catch (err) {
     console.error(err);
-    window.location.href = "login.html"
+    window.location.href = "login.html";
   }
 }
 getCurrentUser().then(() => {
@@ -49,7 +98,6 @@ async function isAdmin() {
     if (response.status === 403) {
       isUserAdmin = false;
       GetMessages();
-      startAutoUpdate();
       return;
     }
     if (!response.ok) {
@@ -86,12 +134,15 @@ async function isAdmin() {
         const div = document.createElement("div");
         div.classList.add("conversation");
 
+        div.dataset.id = conversation.id;
+
         div.addEventListener("click", () => {
-          stopAutoUpdate();
           currentUserId = conversation.user_id;
           selectedConversationId = conversation.id;
+
+          socket.emit("joinConversation", selectedConversationId);
+          console.log("Conectado:", socket.id);
           GetMessagesOnAdmin(selectedConversationId);
-          startAutoUpdate();
         });
 
         const p = document.createElement("p");
@@ -111,6 +162,24 @@ async function isAdmin() {
       window.location.href = "login.html";
     }
   }
+}
+function showNotificationBadge(conversationId) {
+  const conversations = document.querySelectorAll(".conversation");
+
+  conversations.forEach((div) => {
+    if (parseInt(conversationId) === parseInt(div.dataset.id)) {
+      let badge = div.querySelector(".badge");
+
+      if (!badge) {
+        badge = document.createElement("span");
+        badge.classList.add("badge");
+        badge.textContent = "1";
+        div.appendChild(badge);
+      } else {
+        badge.textContent = parseInt(badge.textContent) + 1;
+      }
+    }
+  });
 }
 
 function openMenuConversation() {
@@ -135,6 +204,8 @@ async function GetMessagesOnAdmin(id) {
     const chatContainer = document.getElementById("messages");
     chatContainer.innerHTML = "";
 
+    console.log(data);
+
     data.forEach((msg) => {
       const messageWrapper = document.createElement("div");
       messageWrapper.classList.add("message");
@@ -142,9 +213,7 @@ async function GetMessagesOnAdmin(id) {
       const contentDiv = document.createElement("div");
       contentDiv.classList.add("content");
 
-      const isMine =
-        (!isUserAdmin && msg.sender_id === userId) ||
-        (isUserAdmin && msg.sender_id === currentUserId);
+      const isMine = msg.sender_id === userId;
 
       if (!isMine) {
         messageWrapper.classList.add("my");
@@ -191,10 +260,19 @@ async function GetMessages() {
       throw new Error(`Erro ao buscar mensagens: ${response.status}`);
 
     const data = await response.json();
+    const { conversationId, messages } = data;
+
+    selectedConversationId = conversationId;
+    console.log("ConversationId do user:", conversationId);
+    if (selectedConversationId) {
+      socket.emit("joinConversation", selectedConversationId);
+    }
     const chatContainer = document.getElementById("messages");
     chatContainer.innerHTML = "";
 
-    data.forEach((msg) => {
+    console.log(messages);
+
+    messages.forEach((msg) => {
       const messageWrapper = document.createElement("div");
       messageWrapper.classList.add("message");
 
@@ -215,7 +293,7 @@ async function GetMessages() {
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
-        hour12: false, 
+        hour12: false,
       });
       senderName.textContent = formatted;
 
@@ -233,54 +311,6 @@ async function GetMessages() {
     console.error("Erro no fetch:", error);
   }
 }
-
-async function SendMessageUser(message) {
-  try {
-    const response = await fetch(`${BackendUrl}/chat/send`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Erro ao enviar mensagem");
-    }
-
-    const data = await response.json();
-    console.log("Mensagem enviada:", data);
-
-    GetMessages();
-  } catch (error) {
-    console.error("Erro:", error);
-  }
-}
-async function SendMessageAdmin(conversation_id, message) {
-  try {
-    const response = await fetch(
-      `${BackendUrl}/chat/admin/send/${conversation_id}`,
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message }),
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error("Erro ao enviar mensagem");
-    }
-
-    const data = await response.json();
-    console.log("Mensagem enviada:", data);
-  } catch (error) {
-    console.error("Erro:", error);
-  }
-}
 const form = document.getElementById("form-message");
 
 form.addEventListener("submit", async (e) => {
@@ -291,31 +321,27 @@ form.addEventListener("submit", async (e) => {
 
   if (!message) return;
 
+  if(message.length >= 700){
+    alert("this message is too long")
+    return
+  }
+
   if (isUserAdmin) {
-    SendMessageAdmin(currentUserId, message);
+    if (!currentUserId) {
+      alert("select client first");
+      return;
+    }
+    socket.emit("sendMessage", {
+      currentUserId: currentUserId,
+      message: message,
+    });
   } else {
-    SendMessageUser(message);
+    socket.emit("sendMessage", {
+      message: message,
+    });
   }
 
   input.value = "";
+  input.style.height = "auto";
+  input.style.borderRadius = "20px";
 });
-function startAutoUpdate() {
-  if (intervalId !== null) return;
-
-  intervalId = setInterval(() => {
-    if (document.visibilityState === "visible") {
-      if (isUserAdmin && selectedConversationId) {
-        GetMessagesOnAdmin(selectedConversationId);
-      } else if (!isUserAdmin) {
-        GetMessages();
-      }
-    }
-  }, 3000);
-}
-
-function stopAutoUpdate() {
-  if (intervalId) {
-    clearInterval(intervalId);
-    intervalId = null;
-  }
-}

@@ -1,25 +1,157 @@
 const BackendUrl = "http://localhost:3000";
+let isUserAdmin = null;
 
 document.addEventListener("DOMContentLoaded", async (e) => {
-  e.preventDefault();
-  const response = await fetch(`${BackendUrl}/projects`, {
-    method: "GET",
-    credentials: "include",
-  });
-  const data = await response.json();
-  console.log(data);
-  data.forEach((project) => {
-    GenerateProjects(project.id, project.name, project.photo_url);
-  });
+  getCurrentUser();
+  try {
+    e.preventDefault();
+    const response = await fetch(`${BackendUrl}/projects`, {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await response.json();
+    console.log(data);
+    data.forEach((project) => {
+      GenerateProjects(project.name, project.photo_url);
+    });
+  } catch (error) {
+    alert("Error picking up projects, please try again later.");
+    window.location.href = "index.html"
+  }
 });
+async function getCurrentUser() {
+  try {
+    const response = await fetch(`${BackendUrl}/login/me`, {
+      method: "GET",
+      credentials: "include",
+    });
+    if (!response.ok) throw new Error("Erro ao pegar usuário");
+    const data = await response.json();
+    if (data.role === "admin") {
+      GenerateNewProjects();
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+function GenerateNewProjects() {
+  const section = document.querySelector("main");
+  const div = document.createElement("div");
+  div.classList.add("Add-btn");
+  div.addEventListener("click",()=>{
+    form.classList.toggle("active")
+  })
 
-function GenerateProjects(id, name, photo_url) {
+  const AddIcon = document.createElement("span");
+  AddIcon.classList.add("material-symbols-outlined");
+  AddIcon.id = "add-icon";
+  AddIcon.textContent = "add";
+  div.appendChild(AddIcon);
+  const form = document.createElement("form");
+  form.id = "form";
+
+  const buttonClose = document.createElement("button")
+  buttonClose.classList.add("buttonClose")
+  buttonClose.addEventListener("click",()=>{
+    form.classList.toggle("active")
+  })
+
+  const IconButtonClose = document.createElement("span")
+  IconButtonClose.classList.add("material-symbols-outlined")
+  IconButtonClose.id = "close"
+  IconButtonClose.textContent = "close"
+  buttonClose.appendChild(IconButtonClose)
+
+  const divName = document.createElement("div");
+  divName.className = "Campo Name";
+
+  const labelName = document.createElement("label");
+  labelName.setAttribute("for", "inputName");
+  labelName.textContent = "Name";
+
+  const inputName = document.createElement("input");
+  inputName.type = "text";
+  inputName.name = "name";
+  inputName.id = "inputName";
+  inputName.required = true;
+
+  divName.appendChild(labelName);
+  divName.appendChild(inputName);
+  const divFile = document.createElement("div");
+  divFile.className = "Campo File";
+
+  const inputFile = document.createElement("input");
+  inputFile.type = "file";
+  inputFile.name = "file";
+  inputFile.id = "inputFile";
+  inputFile.accept = "image/*";
+  inputFile.required = true;
+  inputFile.hidden = true;
+
+  const labelFile = document.createElement("label");
+  labelFile.setAttribute("for", "inputFile");
+  labelFile.textContent = "Escolher imagem";
+  labelFile.classList.add("custom-file-btn");
+
+  const previewImg = document.createElement("img");
+  previewImg.classList.add("PreviewImg");
+  previewImg.style.display = "none"
+
+  inputFile.addEventListener("change", () => {
+    const file = inputFile.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        previewImg.src = e.target.result;
+        previewImg.style.display = "block"
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      previewImg.style.display = "none";
+    }
+  });
+
+  divFile.appendChild(inputFile);
+  divFile.appendChild(labelFile);
+  divFile.appendChild(previewImg);
+
+  const button = document.createElement("button");
+  button.type = "submit";
+  button.id = "btn-submit";
+  button.textContent = "submit";
+  button.addEventListener("click",async(e)=>{
+    e.preventDefault();
+    const formData = new FormData(form)
+    try{
+      const response = await fetch(`${BackendUrl}/projects/create`,{
+        method:"POST",
+        credentials:"include",
+        body:formData
+      })
+      const data = await response.json()
+    }catch(erro){
+
+    }
+  })
+
+  form.appendChild(buttonClose)
+  form.appendChild(divName);
+  form.appendChild(divFile);
+  form.appendChild(button);
+
+  section.appendChild(form);
+  section.appendChild(div);
+}
+
+function GenerateProjects(name, photo_url) {
   const section = document.querySelector("main");
   const project = document.createElement("div");
-  project.classList.add("bg-icon")
+  project.classList.add("bg-icon");
 
   const article = document.createElement("article");
-
 
   const divImg = document.createElement("div");
   const imgProject = document.createElement("img");
@@ -37,6 +169,7 @@ function GenerateProjects(id, name, photo_url) {
   article.appendChild(divImg);
   article.appendChild(divText);
   project.appendChild(article);
+
   section.appendChild(project);
 }
 function clickMenu() {
