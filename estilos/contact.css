@@ -1,3 +1,6 @@
+body {
+  overflow-x: visible;
+}
 #messages {
   display: flex;
   height: 70vh;
@@ -9,11 +12,12 @@
 .message {
   display: flex;
   justify-content: start;
+    overflow-wrap: break-word;
 }
 .message.my {
   justify-content: end;
 }
-.conversationsMenu{
+.conversationsMenu {
   display: flex;
   position: absolute;
   right: 0;
@@ -26,12 +30,15 @@
   width: 300px;
   height: 100vh;
   padding: 10px;
-  background:var(--cor3);
+  background: var(--cor3);
   transform: translateX(-300px);
   transition: transform 0.3s ease;
   z-index: 10;
 }
-.conversation{
+.conversation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--cor1);
   border-radius: 10px;
   color: var(--cor2);
@@ -40,10 +47,20 @@
 .sliderBar.active {
   transform: translateX(0);
 }
-.sliderContent{
+.sliderContent {
   display: flex;
   flex-direction: column;
-  gap:10px;
+  gap: 10px;
+}
+.badge {
+  background-color: var(--cor3);
+  padding: 10px 15px;
+  border-radius: 50%;
+  border: 2px solid var(--cor2);
+  color: var(--cor2);
+}
+.badge.active {
+  display: none;
 }
 
 .handle {
@@ -78,13 +95,16 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
   height: 10vh;
 }
 #iMessage {
   width: 90vw;
   border-radius: 80px;
   padding: 10px;
+  resize: none;
+  overflow: hidden;
+  transition: all 0.2s ease;
 }
 .btn {
   background-color: var(--cor3);
@@ -97,6 +117,10 @@
 }
 #form-message {
   display: flex;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  padding: 40px 0px;
   justify-content: center;
   align-items: center;
   flex-direction: row;
