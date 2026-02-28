@@ -70,7 +70,13 @@ main {
   flex-flow: row nowrap;
   justify-content: space-around;
   align-items: center;
-  height: 400px;
+  padding: 20px;
+}
+#who {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: space-around;
+  align-items: center;
   padding: 20px;
 }
 .text h1 {
@@ -94,19 +100,15 @@ main {
   flex-flow: row-reverse wrap;
   justify-content: center;
   align-items: center;
-  width: 400px;
-  height: 400px;
+  width: 330px;
+  height: 330px;
 }
 .image img {
-  height: 200px;
-  width: 200px;
+  height: 165px;
+  width: 165px;
 }
-#who {
-  display: flex;
-  flex-flow: row-reverse nowrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
+.mockup{
+  display: none;
 }
 footer {
   background-color: var(--cor2);
@@ -115,12 +117,15 @@ footer {
   font-family: var(--font1);
   text-align: center;
   font-weight: bold;
-  height: 8vh;
-  padding: 12px;
+  height: 10vh;
+  padding: 10px;
   position: absolute;
+  bottom: -100;
   width: 100%;
   height: 60px;
-  bottom: 0;
+}
+footer p{
+padding-top: 6px;
 }
 
 @media screen and (max-width: 900px) {
@@ -175,14 +180,18 @@ footer {
   }
   main {
     flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
   }
   #history {
     flex-flow: column nowrap;
     justify-content: center;
     width: 100%;
-    padding-top: 100px;
+    padding: 20px 0 0 0;
+  }
+  #who {
+    flex-flow: column-reverse nowrap;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
   }
   .text {
     width: 80%;
@@ -194,22 +203,42 @@ footer {
   .image {
     display: flex;
     flex-flow: row;
-    height: 200px;
+    height: auto;
     width: 100%;
+  }
+  .mockup{
+    display: none;
   }
   .image img {
-    height: 170px;
-    width: 170px;
-  }
-  #who {
-    flex-flow: column-reverse nowrap;
-    justify-content: center;
-    width: 100%;
+    height: 10%;
+    width: 25%;
   }
   footer {
     position: relative;
   }
 }
 @media screen and (max-width:700px) {
-  
+  header{
+    margin: 0px;
+    padding: 0px;
+  }
+  .text{
+    font-size: 1em;
+    padding: 10px;
+  }
+  .text h1{
+    font-size: 2.2em;
+  }
+  .image{
+    display: none;
+  }
+  .mockup{
+    display: flex;
+    width: 100%;
+    height: 50%;
+  }
+  .mockup img{
+    width: 100%;
+    height: 50%;
+  }
 }
