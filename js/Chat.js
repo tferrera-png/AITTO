@@ -1,4 +1,4 @@
-const BackendUrl = "http://localhost:3000";
+const BackendUrl = "https://lakisha-interoptic-ximena.ngrok-free.dev/";
 let isUserAdmin = false;
 let selectedConversationId = null;
 let intervalId = null;
@@ -7,7 +7,7 @@ let currentUserId = null;
 let socket;
 
 try {
-  socket = io("http://localhost:3000", {
+  socket = io("https://lakisha-interoptic-ximena.ngrok-free.dev/", {
     withCredentials: true,
   });
 } catch (error) {
