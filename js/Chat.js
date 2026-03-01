@@ -42,6 +42,10 @@ socket.on("newMessageNotification", (data) => {
 
 socket.on("errorMessage", (err) => {
   console.log("Erro:", err);
+  if(err === "Você está enviando mensagens muito rápido."){
+    alert(err)
+    window.location.href = "index.html"
+  }
 });
 const textarea = document.getElementById("iMessage");
 
@@ -53,7 +57,7 @@ textarea.addEventListener("input", () => {
   textarea.style.height = newHeight + "px";
 
   const progress = Math.min(newHeight / maxHeight, 1);
-  textarea.style.borderRadius = 20 - (12 * progress) + "px";
+  textarea.style.borderRadius = 20 - 12 * progress + "px";
 });
 textarea.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
@@ -243,6 +247,9 @@ async function GetMessagesOnAdmin(id) {
       top: chatContainer.scrollHeight,
       behavior: "smooth",
     });
+    if (response.status === 429) {
+      alert("Please wait a moment");
+    }
   } catch (error) {
     console.error("Erro no fetch:", error);
   }
@@ -307,6 +314,10 @@ async function GetMessages() {
       top: chatContainer.scrollHeight,
       behavior: "smooth",
     });
+    if (response.status === 429) {
+      alert("Please wait a moment");
+      return;
+    }
   } catch (error) {
     console.error("Erro no fetch:", error);
   }
@@ -321,9 +332,9 @@ form.addEventListener("submit", async (e) => {
 
   if (!message) return;
 
-  if(message.length >= 700){
-    alert("this message is too long")
-    return
+  if (message.length >= 700) {
+    alert("this message is too long");
+    return;
   }
 
   if (isUserAdmin) {
