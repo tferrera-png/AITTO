@@ -5,6 +5,7 @@ let intervalId = null;
 let userId = null;
 let currentUserId = null;
 let socket;
+let socketStatusEl = null;
 
 try {
   socket = io("http://localhost:3000", {
@@ -14,8 +15,45 @@ try {
   window.location.href = "login.html";
 }
 
+function showSocketStatus(message) {
+  if (!socketStatusEl) {
+    socketStatusEl = document.createElement("div");
+    socketStatusEl.id = "socket-status";
+    document.body.appendChild(socketStatusEl);
+  }
+  socketStatusEl.textContent = message;
+}
+
+function clearSocketStatus() {
+  if (socketStatusEl) {
+    socketStatusEl.remove();
+    socketStatusEl = null;
+  }
+}
+
 socket.on("connect", () => {
   console.log("Conectado:", socket.id);
+  clearSocketStatus();
+});
+
+socket.on("connect_error", (err) => {
+  showSocketStatus(
+    `Falha na conexao do chat (${err?.message || "erro desconhecido"}). Tentando reconectar...`,
+  );
+});
+
+socket.on("disconnect", () => {
+  showSocketStatus("Conexao do chat perdida. Tentando reconectar...");
+});
+
+socket.io.on("reconnect_attempt", () => {
+  showSocketStatus("Reconectando ao chat...");
+});
+
+socket.io.on("reconnect_failed", () => {
+  showSocketStatus(
+    "Nao foi possivel reconectar ao chat. Recarregue a pagina para tentar novamente.",
+  );
 });
 
 socket.on("receiveMessage", (data) => {
@@ -33,7 +71,8 @@ socket.on("receiveMessage", (data) => {
   }
 });
 socket.on("newMessageNotification", (data) => {
-  alert("🔔 Nova mensagem recebida:", data);
+  const preview = data?.messagePreview ? `${data.messagePreview}` : "";
+  alert(`Nova mensagem recebida na conversa ${data?.conversationId}: ${preview}`);
 
   if (isUserAdmin && data.conversationId !== selectedConversationId) {
     showNotificationBadge(data.conversationId);
@@ -42,9 +81,12 @@ socket.on("newMessageNotification", (data) => {
 
 socket.on("errorMessage", (err) => {
   console.log("Erro:", err);
-  if(err === "Você está enviando mensagens muito rápido."){
-    alert(err)
-    window.location.href = "index.html"
+  if (err === "Você está enviando mensagens muito rápido.") {
+    alert(err);
+    setInterval(() => {
+      window.location.href = "index.html";
+    }, 3000);
+    return;
   }
 });
 const textarea = document.getElementById("iMessage");
@@ -143,6 +185,10 @@ async function isAdmin() {
         div.addEventListener("click", () => {
           currentUserId = conversation.user_id;
           selectedConversationId = conversation.id;
+          const badge = div.querySelector(".badge");
+          if (badge) {
+            badge.remove();
+          }
 
           socket.emit("joinConversation", selectedConversationId);
           console.log("Conectado:", socket.id);
@@ -177,10 +223,9 @@ function showNotificationBadge(conversationId) {
       if (!badge) {
         badge = document.createElement("span");
         badge.classList.add("badge");
-        badge.textContent = "1";
         div.appendChild(badge);
       } else {
-        badge.textContent = parseInt(badge.textContent) + 1;
+        badge.classList.remove("active");
       }
     }
   });
@@ -332,7 +377,7 @@ form.addEventListener("submit", async (e) => {
 
   if (!message) return;
 
-  if (message.length >= 700) {
+  if (message.length >= 500) {
     alert("this message is too long");
     return;
   }

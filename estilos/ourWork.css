@@ -30,6 +30,8 @@
 main {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px;
   justify-items: center;
 }
 .bg-icon {
@@ -40,12 +42,15 @@ main {
   margin: 0 20px;
 
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 
   border-radius: 20px;
 }
 article {
   display: flex;
+  height: 240px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
