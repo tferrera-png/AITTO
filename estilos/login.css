@@ -30,7 +30,7 @@ header{
     flex-flow: row nowrap;
     align-items: center;
     background-color: var(--cor2);
-    height: 10vh;
+    height: 13vh;
     padding-bottom: 20px;
 }
 header  img{
@@ -38,7 +38,7 @@ header  img{
 }
 .logo{
     padding-left: 30px;
-    width: 65%;
+    width: 100%;
 }
 main{
     display: flex;
@@ -84,7 +84,7 @@ form{
 .container h1{
     color: var(--cor2);
     font-family: var(--font1);
-    font-size: 36px;
+    font-size: 32px;
     margin: -10px 0;
 }
 .input-box{
@@ -132,20 +132,6 @@ form{
     font-family: var(--font1);
     font-size: 14.5px;
     margin: 15px 0;
-}
-.social-icons{
-    display: flex;
-    justify-content: center;
-}
-.social-icons a{
-    display: inline-flex;
-    padding: 10px;
-    border: 1px solid var(--cor2);
-    border-radius: 8px;
-    font-size: 15px;
-    color: var(--cor2);
-    text-decoration: none;
-    margin: 0 8px;
 }
 .toggle-box{
     position: absolute;
@@ -206,19 +192,13 @@ form{
 }
 
 @media screen and (max-width: 550px){
-    header{
-        margin-bottom: 10px;
-    }
     .container{
-        height: 90vh;
+        height: 75vh;
     }
     .form-box{
         bottom: 0;
         height: 70%;
         width: 100%
-    }
-    .social-icons a{
-        font-size: 10px;
     }
     .input-box{
         margin: 20px 0;
@@ -234,7 +214,7 @@ form{
         height: 300%;
     }
     .container.active .toggle-box::before{
-        top: 73%;
+        top: 70%;
         left: 0;
     }
     .toggle-panel{
@@ -258,9 +238,9 @@ form{
 }
 @media screen and (max-width: 400px){
     .toggle-box::before{
-        border-radius: 10vw;
+        border-radius: 12vw;
     }
     .toggle-box h1{
-        font-size: 34px;
+        font-size: 30px;
     }
 }
