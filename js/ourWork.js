@@ -1,4 +1,4 @@
-const BackendUrl = "https://aitto-backend-production.up.railway.app/";
+const BackendUrl = "https://aitto-backend-production.up.railway.app";
 let isUserAdmin = null;
 
 document.addEventListener("DOMContentLoaded", async (e) => {
