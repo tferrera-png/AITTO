@@ -1,4 +1,4 @@
-const BackendUrl = "http://localhost:3000";
+const BackendUrl = "https://aitto-backend-production.up.railway.app/";
 function clickMenu() {
   const Menu = document.getElementById("itens");
   Menu.classList.toggle("active");

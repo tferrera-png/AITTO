@@ -2,7 +2,7 @@ const container = document.querySelector(".container");
 const registerBtn = document.querySelector(".register-btn");
 const loginBtn = document.querySelector(".login-btn");
 
-const BackendUrl = "http://localhost:3000";
+const BackendUrl = "https://aitto-backend-production.up.railway.app/";
 
 registerBtn.addEventListener("click", () => {
   container.classList.add("active");
