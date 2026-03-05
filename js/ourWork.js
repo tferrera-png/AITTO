@@ -192,8 +192,12 @@ function GenerateNewProjects() {
         body:formData
       })
       const data = await response.json()
+      if(response.ok){
+        alert("project add")
+        form.classList.toggle("active")
+      }
     }catch(erro){
-
+      alert("projects not add")
     }
   })
 
