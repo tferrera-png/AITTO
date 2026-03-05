@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     });
   } catch (error) {
     alert("Error picking up projects, please try again later.");
-    window.location.href = "index.html"
+    window.location.href = "index.html";
   }
 });
 function UserInfo() {
@@ -43,11 +43,11 @@ function Login() {
   const ButtonLogin = document.createElement("button");
   ButtonLogin.textContent = "Login";
   ButtonLogin.classList.add("ButtonLogout");
-  ButtonLogin.addEventListener("click",()=>{
+  ButtonLogin.addEventListener("click", () => {
     setTimeout(() => {
-      window.location.href = "login.html"
+      window.location.href = "login.html";
     }, 2000);
-  })
+  });
   itens.appendChild(ButtonLogin);
 }
 function ShowInfoUser(user) {
@@ -98,9 +98,9 @@ function GenerateNewProjects() {
   const section = document.querySelector("main");
   const div = document.createElement("div");
   div.classList.add("Add-btn");
-  div.addEventListener("click",()=>{
-    form.classList.toggle("active")
-  })
+  div.addEventListener("click", () => {
+    form.classList.toggle("active");
+  });
 
   const AddIcon = document.createElement("span");
   AddIcon.classList.add("material-symbols-outlined");
@@ -110,17 +110,17 @@ function GenerateNewProjects() {
   const form = document.createElement("form");
   form.id = "form";
 
-  const buttonClose = document.createElement("button")
-  buttonClose.classList.add("buttonClose")
-  buttonClose.addEventListener("click",()=>{
-    form.classList.toggle("active")
-  })
+  const buttonClose = document.createElement("button");
+  buttonClose.classList.add("buttonClose");
+  buttonClose.addEventListener("click", () => {
+    form.classList.toggle("active");
+  });
 
-  const IconButtonClose = document.createElement("span")
-  IconButtonClose.classList.add("material-symbols-outlined")
-  IconButtonClose.id = "close"
-  IconButtonClose.textContent = "close"
-  buttonClose.appendChild(IconButtonClose)
+  const IconButtonClose = document.createElement("span");
+  IconButtonClose.classList.add("material-symbols-outlined");
+  IconButtonClose.id = "close";
+  IconButtonClose.textContent = "close";
+  buttonClose.appendChild(IconButtonClose);
 
   const divName = document.createElement("div");
   divName.className = "Campo Name";
@@ -155,7 +155,7 @@ function GenerateNewProjects() {
 
   const previewImg = document.createElement("img");
   previewImg.classList.add("PreviewImg");
-  previewImg.style.display = "none"
+  previewImg.style.display = "none";
 
   inputFile.addEventListener("change", () => {
     const file = inputFile.files[0];
@@ -165,7 +165,7 @@ function GenerateNewProjects() {
 
       reader.onload = function (e) {
         previewImg.src = e.target.result;
-        previewImg.style.display = "block"
+        previewImg.style.display = "block";
       };
 
       reader.readAsDataURL(file);
@@ -182,26 +182,27 @@ function GenerateNewProjects() {
   button.type = "submit";
   button.id = "btn-submit";
   button.textContent = "submit";
-  button.addEventListener("click",async(e)=>{
+  button.addEventListener("click", async (e) => {
     e.preventDefault();
-    const formData = new FormData(form)
-    try{
-      const response = await fetch(`${BackendUrl}/projects/create`,{
-        method:"POST",
-        credentials:"include",
-        body:formData
-      })
-      const data = await response.json()
-      if(response.ok){
-        alert("project add")
-        form.classList.toggle("active")
+    const formData = new FormData(form);
+    try {
+      const response = await fetch(`${BackendUrl}/projects/create`, {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      });
+      const data = await response.json();
+      form.classList.toggle("active");
+      if (response.ok) {
+        alert("project add");
+        windon.reload();
       }
-    }catch(erro){
-      alert("projects not add")
+    } catch (erro) {
+      alert("projects not add");
     }
-  })
+  });
 
-  form.appendChild(buttonClose)
+  form.appendChild(buttonClose);
   form.appendChild(divName);
   form.appendChild(divFile);
   form.appendChild(button);
@@ -221,7 +222,7 @@ function GenerateProjects(name, photo_url) {
   const imgProject = document.createElement("img");
   imgProject.src = `${BackendUrl}${photo_url}`;
   imgProject.alt = name;
-  divImg.classList.add("image");
+  divImg.classList.add("imageProjects");
   divImg.appendChild(imgProject);
 
   const divText = document.createElement("div");
