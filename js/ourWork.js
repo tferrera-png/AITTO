@@ -195,7 +195,6 @@ function GenerateNewProjects() {
       form.classList.toggle("active");
       if (response.ok) {
         alert("project add");
-        windon.reload();
       }
     } catch (erro) {
       alert("projects not add");
