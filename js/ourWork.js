@@ -182,8 +182,7 @@ function GenerateNewProjects() {
   button.type = "submit";
   button.id = "btn-submit";
   button.textContent = "submit";
-  button.addEventListener("click", async (e) => {
-    e.preventDefault();
+  button.addEventListener("click", async () => {
     const formData = new FormData(form);
     try {
       const response = await fetch(`${BackendUrl}/projects/create`, {
