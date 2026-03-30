@@ -3,7 +3,7 @@
 :root {
   --cor1: #060607;
   --cor2: #f1f4ff;
-  --cor3: #f81a3f;
+  --cor3: #f9a03f;
   --font1: "ArgentumSans";
   --font2: "ArgentumSansita";
 }
@@ -34,7 +34,7 @@ header {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--cor2);
+  background-color: var(--cor3);
   height: 11vh;
   margin-bottom: 30px;
 }
@@ -45,7 +45,7 @@ header {
   display: none;
 }
 header img {
-  width: 100px;
+  width: 20vh;
 }
 .logo {
   padding-left: 30px;
@@ -89,6 +89,7 @@ menu a {
   padding: 5px;
   border: 0;
   border-radius: 10px;
+  cursor: pointer;
 }
 main {
   display: flex;
@@ -142,7 +143,7 @@ main {
   display: none;
 }
 footer {
-  background-color: var(--cor2);
+  background-color: var(--cor3);
   color: var(--cor3);
   font-size: 1.3em;
   font-family: var(--font1);
@@ -156,6 +157,7 @@ footer {
 }
 footer p {
   padding-top: 6px;
+  color: var(--cor1);
 }
 
 @media screen and (max-width: 900px) {

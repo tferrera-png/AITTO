@@ -3,7 +3,7 @@
 :root{
     --cor1: #060607;
     --cor2: #F1F4FF;
-    --cor3: #F81A3F;
+    --cor3: #F9a03f;
     --font1: 'argentumsans';
     --font2: 'argentumsansita'
 }
@@ -29,12 +29,11 @@ header{
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    background-color: var(--cor2);
-    height: 13vh;
-    padding-bottom: 20px;
+    background-color: var(--cor3);
+    height: 11vh;
 }
 header  img{
-    width: 100px;
+    width: 20vh;
 }
 .logo{
     padding-left: 30px;
@@ -44,7 +43,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 89vh;
 }
 .container{
     position: relative;
