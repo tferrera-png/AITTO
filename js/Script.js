@@ -2,7 +2,7 @@ const container = document.querySelector(".container");
 const registerBtn = document.querySelector(".register-btn");
 const loginBtn = document.querySelector(".login-btn");
 
-const BackendUrl = "http://localhost:3000";
+const BackendUrl = "https://aitto-backend-production.up.railway.app";
 
 registerBtn.addEventListener("click", () => {
   container.classList.add("active");
@@ -32,6 +32,9 @@ function login() {
       const data = await response.json();
       if (response.ok) {
         alert("login feito com sucesso");
+        const permitido = await pedirPermissaoNotificacao();
+
+        console.log("Permissão notificação:", permitido);
         setTimeout(() => {
           window.location.href = "Contact.html";
         }, 1500);
@@ -68,6 +71,9 @@ function register() {
       const data = await response.json();
       if (response.ok) {
         alert("register feito com sucesso");
+        const permitido = await pedirPermissaoNotificacao();
+
+        console.log("Permissão notificação:", permitido);
         setTimeout(() => {
           window.location.href = "index.html";
         }, 1500);
@@ -79,6 +85,13 @@ function register() {
       alert("Register error, please try again later.");
     }
   });
+}
+async function pedirPermissaoNotificacao() {
+  if (Notification.permission === "default") {
+    const permission = await Notification.requestPermission();
+    return permission === "granted";
+  }
+  return Notification.permission === "granted";
 }
 register();
 login();

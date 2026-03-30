@@ -1,4 +1,4 @@
-const BackendUrl = "http://localhost:3000";
+const BackendUrl = "https://aitto-backend-production.up.railway.app";
 let isUserAdmin = false;
 let selectedConversationId = null;
 let intervalId = null;
@@ -6,9 +6,8 @@ let userId = null;
 let currentUserId = null;
 let socket;
 let socketStatusEl = null;
-
 try {
-  socket = io("http://localhost:3000", {
+  socket = io(BackendUrl, {
     withCredentials: true,
   });
 } catch (error) {
@@ -71,11 +70,23 @@ socket.on("receiveMessage", (data) => {
   }
 });
 socket.on("newMessageNotification", (data) => {
-  const preview = data?.messagePreview ? `${data.messagePreview}` : "";
-  alert(`Nova mensagem recebida na conversa ${data?.conversationId}: ${preview}`);
+  const preview = data?.messagePreview ?? "";
+  const conversationId = data?.conversationId;
 
-  if (isUserAdmin && data.conversationId !== selectedConversationId) {
-    showNotificationBadge(data.conversationId);
+  alert(`new message: ${preview}`)
+
+  if (Notification.permission === "granted") {
+    const notification = new Notification("Nova mensagem", {
+      body: preview,
+      tag: `conversation-${conversationId}`
+    });
+
+    notification.onclick = () => {
+      window.focus();
+    };
+  }
+  if (isUserAdmin && conversationId !== selectedConversationId) {
+    showNotificationBadge(conversationId);
   }
 });
 
@@ -88,7 +99,7 @@ socket.on("errorMessage", (err) => {
     }, 3000);
     return;
   }
-})
+});
 function UserInfo() {
   window.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
@@ -113,11 +124,11 @@ function Login() {
   const ButtonLogin = document.createElement("button");
   ButtonLogin.textContent = "Login";
   ButtonLogin.classList.add("ButtonLogout");
-  ButtonLogin.addEventListener("click",()=>{
+  ButtonLogin.addEventListener("click", () => {
     setTimeout(() => {
-      window.location.href = "login.html"
+      window.location.href = "login.html";
     }, 2000);
-  })
+  });
   itens.appendChild(ButtonLogin);
 }
 function ShowInfoUser(user) {
