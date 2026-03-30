@@ -36,7 +36,6 @@ header  img{
     width: 20vh;
 }
 .logo{
-    padding-left: 30px;
     width: 100%;
 }
 main{
@@ -191,6 +190,9 @@ form{
 }
 
 @media screen and (max-width: 550px){
+    header img{
+        height: 15vh;
+    }
     .container{
         height: 75vh;
     }

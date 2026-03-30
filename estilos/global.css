@@ -48,7 +48,7 @@ header img {
   width: 20vh;
 }
 .logo {
-  padding-left: 30px;
+  padding-left: 25px;
   width: 60%;
 }
 menu {
@@ -169,6 +169,7 @@ footer p {
   .logo {
     display: flex;
     justify-content: flex-end;
+    width: 80%;
   }
   #icon-menu {
     display: flex;
@@ -259,6 +260,9 @@ footer p {
   header {
     margin: 0px;
     padding: 0px;
+  }
+  header img{
+    height: 15vh;
   }
   .text {
     font-size: 1em;
