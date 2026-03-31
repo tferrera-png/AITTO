@@ -63,7 +63,7 @@ menu a {
   font-weight: bold;
   font-size: 1.2em;
   padding: 10px;
-  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.774)
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.774);
 }
 #itens {
   display: flex;
@@ -79,7 +79,7 @@ menu a {
   border-radius: 10px;
 }
 .PUserInfo {
-  color: var(--cor3);
+  color: var(--cor1);
   justify-content: center;
   align-items: center;
 }
@@ -90,6 +90,62 @@ menu a {
   border: 0;
   border-radius: 10px;
   cursor: pointer;
+}
+.AlertElement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #014101;
+  border-radius: 10px;
+  border: 1px solid var(--cor2);
+  color: var(--cor2);
+  position: fixed;
+  z-index: 30;
+  padding: 40px 20px;
+  margin: 30px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.AlertElement.negative {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ab0000;
+  border: 1px solid var(--cor1);
+  color: var(--cor2);
+  position: fixed;
+  z-index: 30;
+  padding: 40px 20px;
+  margin: 30px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.AlertElement.active {
+  display: none;
+}
+.AlertButtonElement {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #014101;
+  border: 1px solid var(--cor2);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  color: var(--cor2);
+}
+.AlertButtonElement.negative{
+    position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: 1px solid var(--cor2);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  color: var(--cor2);
 }
 main {
   display: flex;
@@ -261,7 +317,7 @@ footer p {
     margin: 0px;
     padding: 0px;
   }
-  header img{
+  header img {
     height: 13vh;
   }
   .text {

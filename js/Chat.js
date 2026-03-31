@@ -1,4 +1,5 @@
-const BackendUrl = "https://aitto-backend-production.up.railway.app";
+const BackendUrl = "http://localhost:3000";
+// const BackendUrl = "https://aitto-backend-production.up.railway.app";
 let isUserAdmin = false;
 let selectedConversationId = null;
 let intervalId = null;
@@ -73,7 +74,7 @@ socket.on("newMessageNotification", (data) => {
   const preview = data?.messagePreview ?? "";
   const conversationId = data?.conversationId;
 
-  alert(`new message: ${preview}`)
+  AlertElement(`new message: ${preview}`, true)
 
   if (Notification.permission === "granted") {
     const notification = new Notification("Nova mensagem", {
@@ -93,13 +94,37 @@ socket.on("newMessageNotification", (data) => {
 socket.on("errorMessage", (err) => {
   console.log("Erro:", err);
   if (err === "Você está enviando mensagens muito rápido.") {
-    alert(err);
+    AlertElement(err, false);
     setInterval(() => {
       window.location.href = "index.html";
     }, 3000);
     return;
   }
 });
+function AlertElement(message, type) {
+  const divAlert = document.createElement("div");
+  const buttonClose = document.createElement("button");
+
+  if (type) {
+    divAlert.classList.add("AlertElement");
+    buttonClose.classList.add("AlertButtonElement");
+  } else {
+    divAlert.classList.add("AlertElement", "negative");
+    buttonClose.classList.add("AlertButtonElement");
+  }
+
+  const messageAlert = document.createElement("p");
+  messageAlert.textContent = message;
+
+  buttonClose.textContent = "x";
+  buttonClose.addEventListener("click", () => {
+    divAlert.classList.toggle("active");
+  });
+
+  divAlert.appendChild(messageAlert);
+  divAlert.appendChild(buttonClose);
+  document.body.appendChild(divAlert);
+}
 function UserInfo() {
   window.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
@@ -115,7 +140,7 @@ function UserInfo() {
         ShowInfoUser(data);
       }
     } catch (error) {
-      alert("Server error, please try again later");
+      AlertElement("Server error, please try again later", false);
     }
   });
 }
@@ -365,7 +390,7 @@ async function GetMessagesOnAdmin(id) {
       behavior: "smooth",
     });
     if (response.status === 429) {
-      alert("Please wait a moment");
+      AlertElement("Please wait a moment", false);
     }
   } catch (error) {
     console.error("Erro no fetch:", error);
@@ -432,7 +457,7 @@ async function GetMessages() {
       behavior: "smooth",
     });
     if (response.status === 429) {
-      alert("Please wait a moment");
+      AlertElement("Please wait a moment", false);
       return;
     }
   } catch (error) {
@@ -450,13 +475,13 @@ form.addEventListener("submit", async (e) => {
   if (!message) return;
 
   if (message.length >= 500) {
-    alert("this message is too long");
+    AlertElement("this message is too long", false);
     return;
   }
 
   if (isUserAdmin) {
     if (!currentUserId) {
-      alert("select client first");
+      AlertElement("select client first", false);
       return;
     }
     socket.emit("sendMessage", {
