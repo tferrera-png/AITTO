@@ -101,7 +101,11 @@ socket.on("errorMessage", (err) => {
     return;
   }
 });
+
 function AlertElement(message, type) {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("AlertWrapper");
+
   const divAlert = document.createElement("div");
   const buttonClose = document.createElement("button");
 
@@ -118,12 +122,13 @@ function AlertElement(message, type) {
 
   buttonClose.textContent = "x";
   buttonClose.addEventListener("click", () => {
-    divAlert.classList.toggle("active");
+    wrapper.remove();
   });
 
   divAlert.appendChild(messageAlert);
   divAlert.appendChild(buttonClose);
-  document.body.appendChild(divAlert);
+  wrapper.appendChild(divAlert)
+  document.body.appendChild(wrapper);
 }
 function UserInfo() {
   window.addEventListener("DOMContentLoaded", async (e) => {
