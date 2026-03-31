@@ -1,5 +1,5 @@
-const BackendUrl = "http://localhost:3000";
-// const BackendUrl = "https://aitto-backend-production.up.railway.app";
+
+const BackendUrl = "https://aitto-backend-production.up.railway.app";
 let isUserAdmin = false;
 let selectedConversationId = null;
 let intervalId = null;
