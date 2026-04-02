@@ -3,6 +3,36 @@ function clickMenu() {
   const Menu = document.getElementById("itens");
   Menu.classList.toggle("active");
 }
+
+function AlertElement(message, type) {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("AlertWrapper");
+
+  const divAlert = document.createElement("div");
+  const buttonClose = document.createElement("button");
+
+  if (type) {
+    divAlert.classList.add("AlertElement");
+    buttonClose.classList.add("AlertButtonElement");
+  } else {
+    divAlert.classList.add("AlertElement", "negative");
+    buttonClose.classList.add("AlertButtonElement");
+  }
+
+  const messageAlert = document.createElement("p");
+  messageAlert.textContent = message;
+
+  buttonClose.textContent = "x";
+  buttonClose.addEventListener("click", () => {
+    wrapper.remove();
+  });
+
+  divAlert.appendChild(messageAlert);
+  divAlert.appendChild(buttonClose);
+  wrapper.appendChild(divAlert)
+  document.body.appendChild(wrapper);
+}
+
 function UserInfo() {
   window.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
@@ -18,7 +48,7 @@ function UserInfo() {
         ShowInfoUser(data);
       }
     } catch (error) {
-      alert("Server error, please try again later");
+      AlertElement("Server error, please try again later", false);
     }
   });
 }
@@ -27,11 +57,11 @@ function Login() {
   const ButtonLogin = document.createElement("button");
   ButtonLogin.textContent = "Login";
   ButtonLogin.classList.add("ButtonLogout");
-  ButtonLogin.addEventListener("click",()=>{
+  ButtonLogin.addEventListener("click", () => {
     setTimeout(() => {
-      window.location.href = "login.html"
+      window.location.href = "login.html";
     }, 2000);
-  })
+  });
   itens.appendChild(ButtonLogin);
 }
 function ShowInfoUser(user) {

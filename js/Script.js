@@ -12,6 +12,36 @@ loginBtn.addEventListener("click", () => {
   container.classList.remove("active");
 });
 
+
+function AlertElement(message, type) {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("AlertWrapper");
+
+  const divAlert = document.createElement("div");
+  const buttonClose = document.createElement("button");
+
+  if (type) {
+    divAlert.classList.add("AlertElement");
+    buttonClose.classList.add("AlertButtonElement");
+  } else {
+    divAlert.classList.add("AlertElement", "negative");
+    buttonClose.classList.add("AlertButtonElement");
+  }
+
+  const messageAlert = document.createElement("p");
+  messageAlert.textContent = message;
+
+  buttonClose.textContent = "x";
+  buttonClose.addEventListener("click", () => {
+    wrapper.remove();
+  });
+
+  divAlert.appendChild(messageAlert);
+  divAlert.appendChild(buttonClose);
+  wrapper.appendChild(divAlert)
+  document.body.appendChild(wrapper);
+}
+
 function login() {
   const form = document.getElementById("form-login");
 
@@ -31,7 +61,7 @@ function login() {
       });
       const data = await response.json();
       if (response.ok) {
-        alert("login feito com sucesso");
+        AlertElement("login feito com sucesso", true);
         const permitido = await pedirPermissaoNotificacao();
 
         console.log("Permissão notificação:", permitido);
@@ -40,10 +70,13 @@ function login() {
         }, 1500);
       }
       if (!response.ok) {
-        alert(data.message || "Erro ao realizar login");
+        AlertElement("Erro ao realizar login", false);
+      }
+      if(!response){
+        console.log("h")
       }
     } catch (error) {
-      alert("Login error, please try again later.");
+      AlertElement("Login error, please try again later.", false);
     }
   });
 }
@@ -70,7 +103,7 @@ function register() {
       });
       const data = await response.json();
       if (response.ok) {
-        alert("register feito com sucesso");
+        AlertElement("register feito com sucesso", true);
         const permitido = await pedirPermissaoNotificacao();
 
         console.log("Permissão notificação:", permitido);
@@ -79,10 +112,10 @@ function register() {
         }, 1500);
       }
       if (!response.ok) {
-        alert(data);
+        AlertElement(data, false);
       }
     } catch (error) {
-      alert("Register error, please try again later.");
+      AlertElement("Register error, please try again later.", false);
     }
   });
 }
